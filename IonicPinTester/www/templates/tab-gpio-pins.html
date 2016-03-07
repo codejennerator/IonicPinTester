@@ -1,0 +1,21 @@
+﻿<ion-view view-title="GPIO Pins">
+    <ion-content>
+        <form name="pinManipulate">
+            <div class="list">
+                <label class="item item-input">
+                    <input type="text" placeholder="enter pin num" ng-model="pinNum">
+                </label>
+
+                <div class="padding">
+                    <button type="button" ng-click="addPin(pinNum)" class="button button-block button-positive">Add Pin</button>
+                </div>
+                <div class="padding">
+                    <button type="button" ng-click="updatePin(pinNum)" class="button button-block button-positive">Update Pin</button>
+                </div>
+                <div class="padding">
+                    <button type="button" ng-click="deletePin(pinNum)" class="button button-block button-positive">Delete Pin</button>
+                </div>
+            </div>
+        </form>
+    </ion-content>
+</ion-view>
