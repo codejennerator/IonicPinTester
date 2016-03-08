@@ -9,11 +9,21 @@
                 <div class="padding">
                     <button type="button" ng-click="addPin(pinNum)" class="button button-block button-positive">Add Pin</button>
                 </div>
-                <div class="padding">
-                    <button type="button" ng-click="updatePin(pinNum)" class="button button-block button-positive">Update Pin</button>
-                </div>
-                <div class="padding">
-                    <button type="button" ng-click="deletePin(pinNum)" class="button button-block button-positive">Delete Pin</button>
+            
+                <div ng-repeat="pin in pins">
+                    <div class="padding" ng-if="pin.status == 'error' ">
+                        {{pin.error}}
+                        <button type="button" ng-click="removeError(pin)" class="button button-block button-assertive">Acknowledge</button>
+                    </div>
+                    <div class="padding" ng-if="pin.status == 'success' ">
+                        {{pin.message}}
+                    </div>
+                    <div class="padding" ng-if="pin.status == 'success' ">
+                        <button type="button" ng-click="updatePin(pin)" class="button button-block button-positive">Update Pin</button>
+                    </div>
+                    <div class="padding" ng-if="pin.status == 'success' ">
+                        <button type="button" ng-click="deletePin(pin)" class="button button-block button-positive">Delete Pin</button>
+                    </div>
                 </div>
             </div>
         </form>
