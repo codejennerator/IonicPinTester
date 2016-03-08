@@ -6,7 +6,7 @@ angular.module('starter.services', [])
     var deletePath = '/deletePin';
     var addPath = '/addPin';
     var updatePath = '/updatePin';
-    var pins = [];
+    var pins = {};
 
     return {
         //gets all currently open pins
@@ -26,21 +26,23 @@ angular.module('starter.services', [])
                 if (response.data.message) {
                     pin.status = 'success';
                     pin.message = 'GPIO Pin Number ' + pin.pinNum + ' is open';
-                    pins.push(pin);
+                    pins[pinNum] = pin;
                     console.log('in add pin' + pin.pinNum);
                 }
                 if (response.data.error) {
                     pin.status = 'error';
                     pin.error = response.data.error;
                     console.log(response.data.error);
-                    pins.push(pin);
+                    pin.pinNum = 'error' + pinNum;
+                    pins['error' + pinNum] = pin;
                 }
                 console.log(response.data);
             }).catch(function (response) {
                 pin.status = 'error';
                 pin.error = response.data.error;
                 console.log('Add Error ', response.status, response.data);
-                pins.push(pin);
+                pin.pinNum = 'error' + pinNum;
+                pins['error' + pinNum] = pin;
             });
         },
         //changes the state of a pin to the opposite of the current state
@@ -51,7 +53,7 @@ angular.module('starter.services', [])
                 method: "PUT",
                 params: { "pin_num": pin.pinNum }
             }).then(function (response) {
-                //we get a response.data.message when it is successfull and response.data.error when there is an error
+                //we get a response.data.message when it is successful and response.data.error when there is an error
                 if (response.data.error) {
                     pin.status = 'error';
                     pin.error = response.data.error;
@@ -72,9 +74,9 @@ angular.module('starter.services', [])
                 method: "DELETE",
                 params: { "pin_num": pin.pinNum }
             }).then(function (response) {
-                //we get a response.data.message when it is successfull and response.data.error when there is an error
+                //we get a response.data.message when it is successful and response.data.error when there is an error
                 if (response.data.message) {
-                    pins.splice(pins.indexOf(pin.pinNum), 1);
+                    delete pins[pin.pinNum];
                     console.log('in delete pin' + pin.pinNum);
                 }
                 if (response.data.error) {
@@ -92,7 +94,8 @@ angular.module('starter.services', [])
         },
         //this is to remove the error message once user has acknowledged it
         removeError: function ($http, pin) {
-            pins.splice(pins.indexOf(pin.pinNum), 1);
+            delete pins[pin.pinNum];
+            console.log('Removing error num ' + pin.pinNum);
             console.log('Removing error' + pin.error);
         }
     };

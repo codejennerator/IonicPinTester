@@ -19,10 +19,10 @@
                         {{pin.message}}
                     </div>
                     <div class="padding" ng-if="pin.status == 'success' ">
-                        <button type="button" ng-click="updatePin(pin)" class="button button-block button-positive">Update Pin</button>
+                        <button type="button" ng-click="updatePin(pin)" class="button button-block button-positive">Update Pin {{pin.pinNum}}</button>
                     </div>
                     <div class="padding" ng-if="pin.status == 'success' ">
-                        <button type="button" ng-click="deletePin(pin)" class="button button-block button-positive">Delete Pin</button>
+                        <button type="button" ng-click="deletePin(pin)" class="button button-block button-positive">Delete Pin {{pin.pinNum}}</button>
                     </div>
                 </div>
             </div>
