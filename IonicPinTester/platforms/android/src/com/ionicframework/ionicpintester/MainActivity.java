@@ -17,7 +17,7 @@
        under the License.
  */
 
-package com.ionicframework.ionicblankapp;
+package com.ionicframework.ionicpintester;
 
 import android.os.Bundle;
 import org.apache.cordova.*;
